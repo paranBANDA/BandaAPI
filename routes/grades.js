@@ -1,17 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../model/grades');
+const Grade = require('../model/grades');
 
 // 사용자 전체 조회
 router.get('/', (req, res, next) => {
-    User.find()
-        .then((users) => {
-            res.json(users);
-        })
-        .catch((err) => {
-            console.error(err);
-            next(err);
-        })
+    Grade.findOne(
+        {student_id: 0},
+        function (err, obj) {
+            console.log(obj);
+        }
+    )
 });
 
 // 유저 생성

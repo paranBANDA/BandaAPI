@@ -7,13 +7,17 @@ const app = express();
 var router = express.Router();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 var connect = require('./model');
+const Grade = require("./model/grades");
 connect();
 
 
-router.use('/grades', require('./grades'));
-
-app.get("/", (req, res) => {
-    res.send("Hello World");
+app.get('/', (req, res, next) => {
+    Grade.findOne(
+        {student_id: 0},
+        function (err, obj) {
+            console.log(obj);
+            res.send(obj);
+        }
+    )
 });
-
 app.listen(3000, () => console.log("HI YO"));

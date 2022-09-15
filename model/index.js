@@ -4,10 +4,8 @@ const connect = () => {
         mongoose.set('debug', true);
     }
 
-    mongoose.connect('mongodb+srv://banda:bandabanda@cluster0.aqaj3o5.mongodb.net/?retryWrites=true&w=majority', {
-        dbName: 'sample_training',
+    mongoose.connect('mongodb+srv://banda:bandabanda@cluster0.aqaj3o5.mongodb.net/sample_training?retryWrites=true&w=majority', {
         useNewUrlParser: true,
-        userCreateIndex: true,
     }, (error) => {
         if (error) {
             console.log('몽고디비 연결 에러', error);
