@@ -5,7 +5,7 @@ const connect = () => {
     }
 
     mongoose.connect('mongodb+srv://banda:bandabanda@cluster0.aqaj3o5.mongodb.net/?retryWrites=true&w=majority', {
-        dbName: 'sample_traning',
+        dbName: 'sample_training',
         useNewUrlParser: true,
         userCreateIndex: true,
     }, (error) => {
