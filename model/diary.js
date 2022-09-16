@@ -25,4 +25,4 @@ const diarySchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('Grade', diarySchema);
+module.exports = mongoose.model('diary', diarySchema);

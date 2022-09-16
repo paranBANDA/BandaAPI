@@ -13,4 +13,4 @@ const familySchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('Grade', familySchema);
+module.exports = mongoose.model('family', familySchema);

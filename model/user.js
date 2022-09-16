@@ -34,4 +34,4 @@ const userSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('Grade', userSchema);
+module.exports = mongoose.model('user', userSchema);

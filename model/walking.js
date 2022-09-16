@@ -28,4 +28,4 @@ const walkingSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('Grade', walkingSchema);
+module.exports = mongoose.model('walking', walkingSchema);

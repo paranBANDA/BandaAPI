@@ -28,4 +28,4 @@ const petSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('Grade', petSchema);
+module.exports = mongoose.model('pet', petSchema);
