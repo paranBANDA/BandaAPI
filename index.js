@@ -8,9 +8,15 @@ var router = express.Router();
 const { MongoClient, ServerApiVersion } = require('mongodb');
 var connect = require('./model');
 const Grade = require('./model/grades');
+const user = require('./model/user');
+const diary = require('./model/diary');
+const family = require('./model/family');
+const pet = require('./model/pet');
+const walking = require('./model/walking');
 connect();
 
 app.get('/', (req, res, next) => {
+	console.log(family)
 	Grade.findOne({ student_id: 0 }, function (err, obj) {
 		console.log(obj);
 		res.send(obj);
