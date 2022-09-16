@@ -1,25 +1,28 @@
 {
-  "name": "bandaapi",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paranBANDA/BandaAPI.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/paranBANDA/BandaAPI/issues"
-  },
-  "homepage": "https://github.com/paranBANDA/BandaAPI#readme",
-  "dependencies": {
-    "body-parser": "^1.20.0",
-    "express": "^4.18.1",
-    "mongodb": "^4.9.1",
-    "mongoose": "^6.6.1"
-  }
+	"name": "bandaapi",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/paranBANDA/BandaAPI.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/paranBANDA/BandaAPI/issues"
+	},
+	"homepage": "https://github.com/paranBANDA/BandaAPI#readme",
+	"dependencies": {
+		"body-parser": "^1.20.0",
+		"express": "^4.18.1",
+		"mongodb": "^4.9.1",
+		"mongoose": "^6.6.1"
+	},
+	"devDependencies": {
+		"prettier": "2.7.1"
+	}
 }
