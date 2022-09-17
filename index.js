@@ -16,10 +16,9 @@ const walking = require('./model/walking');
 connect();
 
 app.get('/', (req, res, next) => {
-	console.log(family)
-	Grade.findOne({ student_id: 0 }, function (err, obj) {
+	user.findOne({name : "유"}, function(err,obj){
 		console.log(obj);
 		res.send(obj);
-	});
+	})
 });
 app.listen(3000, () => console.log('HI YO'));
