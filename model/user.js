@@ -5,14 +5,14 @@ const userSchema = new Schema({
 	userId: {
 		type: String,
 	},
+	email: {
+		type: String,
+	},
 	pw: {
 		type: String,
 	},
 	familyId: {
 		type: String,
-	},
-	petId: {
-		type: Number,
 	},
 	type: {
 		type: String,
@@ -28,6 +28,9 @@ const userSchema = new Schema({
 	},
 	lastwalking: {
 		type: String,
+	},
+	walkingstate: {
+		type: Boolean,
 	},
 	locationallow: {
 		type: Boolean,

@@ -8,6 +8,9 @@ const petSchema = new Schema({
 	birthday: {
 		type: Date,
 	},
+	userId: {
+		type: String,
+	},
 	familyId: {
 		type: String,
 	},
