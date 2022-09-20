@@ -21,4 +21,10 @@ app.get('/', (req, res, next) => {
 		res.send(obj);
 	})
 });
+app.get('/Grade', (req, res, next) => {
+	Grade.findOne({student_id : 0}, function(err,obj){
+		console.log(obj);
+		res.send(obj);
+	})
+});
 app.listen(3000, () => console.log('HI YO'));
