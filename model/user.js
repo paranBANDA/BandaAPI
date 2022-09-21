@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 const userSchema = new Schema({
 	userId: {
@@ -36,5 +35,4 @@ const userSchema = new Schema({
 		type: Boolean,
 	},
 });
-
-module.exports = mongoose.model('user', userSchema);
+export default mongoose.model('User', userSchema);
