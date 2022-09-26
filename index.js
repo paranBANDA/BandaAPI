@@ -23,7 +23,7 @@ app.get('/', (req, res, next) => {
 app.post('/login', function (req, res, next) { //로그인 API
 	var localEmail = req.body.email;
 	var localPassword = req.body.password;
- 
+	console.log(req.body,localEmail,localPassword)
 	var findConditionLocalUser = {
 		email: localEmail,
 		pw: localPassword
