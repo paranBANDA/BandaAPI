@@ -5,14 +5,19 @@ import dotenv from 'dotenv'
 import {auth} from './authMiddleware.js'
 import User from './model/user.js';
 import {connect} from './model/index.js'
-const app = express();
+import authRouter from './auth/auth.js';
+
+var app = express()
+
 var router = express.Router();
 connect();
 dotenv.config();
 app.use(express.json());
+app.use(express.urlencoded({extended : false}));
 var jwtSecret = "secret"
 const key = "Secret_Key"
 
+app.use('/auth',authRouter);
 
 app.get('/', (req, res, next) => {
 	User.findOne({name : "유"}, function(err,obj){
@@ -20,6 +25,8 @@ app.get('/', (req, res, next) => {
 		res.send(obj);
 	})
 });
+
+// id, pw undifined로 리퀘스트보내니까 토큰 생성됨 이라는 response 보냄 수정 필요. 아 테스트하면서 email, pw undefined된 값들이 들어가 있어서 그런가?.
 app.post('/login', function (req, res, next) { //로그인 API
 	var localEmail = req.body.email;
 	var localPassword = req.body.password;
