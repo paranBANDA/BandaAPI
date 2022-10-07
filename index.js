@@ -121,10 +121,35 @@ app.post('/register',async (req,res)=>{	//회원가입 API
 		}
 	})
 })
+app.post('/emailcheck',async(req,res)=>{	//email check 함수
+	const id = req.body.email
+	var findConditionLocalUser = {
+		email: id,
+	}
+	User.findOne(findConditionLocalUser)
+	.exec(function(err,user){
+		if (err){
+			res.json({
+				type: false,
+				data: "Error occured " + err
+			});
+		} else if (user) {
+			res.json({
+				type: false,
+				data: "Email already exists"
+			});
+		}
+		else{
+			res.json({
+				type: true,
+				data: "email available"
+			})
+		}
+	})
+})
 function localSignup(req, next){	//회원가입 함수
 		const user = new User(req);
 		user.save(function (err, newUser) {
-			console.log(newUser)
 			newUser.jsonWebToken = jwt.sign(newUser.toJSON(), jwtSecret);
 			newUser.save(function (err, savedUser) {
 				next(err, savedUser);
