@@ -1,6 +1,7 @@
 import express from 'express';
 import User from '../model/user.js';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 var jwtSecret = "secret"
 const key = "Secret_Key"
@@ -18,49 +19,73 @@ router.get('/about', function(req, res) {
   res.send('hi2');
 });
 
+// 임시 회원가입.
+router.post('/register',async (req,res)=>{	//회원가입 API 
+	const id = req.body.email
+	const password = req.body.pw
+
+	const hashed = await bcrypt.hash(password,10);
+	const user = new User({
+		pw: hashed,
+		email: id
+	});
+	user.save();
+	return res.status(200).json({
+		code: 200,
+		message: "register",
+	  });
+});
+
 router.post('/login', function (req, res, next) { //로그인 API
 	var localEmail = req.body.email;
-	var localPassword = req.body.password;
-	console.log(req.body,localEmail,localPassword)
 	var findConditionLocalUser = {
-		email: localEmail,
-		pw: localPassword
+		email: localEmail
 	}
 	User.findOne(findConditionLocalUser)
-		 .exec(function (err, user) {
+		 .exec(async function (err, user) {
 			 if (err){
 				 res.json({
 					 type: false,
 					 data: "Error occured " + err
 				 });
-			 } else if (!user) {
-				 res.json({
-					 type: false,
-					 data: "Incorrect email/password"
-				 });
 			 } else if(user) {
-				const email = user.email;
-				const nickname = user.nickname;
-				let token = "";
-				// jwt.sign(payload, secretOrPrivateKey, [options, callback])
-				token = jwt.sign(
-				  {
-					type: "JWT",
-					email : email,
-					nickname: nickname
-				  },
-				  key,
-				  {
-					expiresIn: "15m", // 15분후 만료
-					issuer: "토큰발급자",
-				  }
-				);
-				return res.status(200).json({
-				  code: 200,
-				  message: "token is created",
-				  token: token,
+				var localPassword = req.body.password;
+				console.log(localPassword, user.pw);
+				var isCorrectPw = await bcrypt.compare(localPassword ,user.pw);
+				if(isCorrectPw) {
+
+					const email = user.email;
+					const nickname = user.nickname;
+					let token = "";
+					// jwt.sign(payload, secretOrPrivateKey, [options, callback])
+					token = jwt.sign(
+					  {
+						type: "JWT",
+						email : email,
+						nickname: nickname
+					  },
+					  key,
+					  {
+						expiresIn: "15m", // 15분후 만료
+						issuer: "토큰발급자",
+					  }
+					);
+					return res.status(200).json({
+					  code: 200,
+					  message: "token is created",
+					  token: token,
+					});
+				}
+				res.json({
+					type: false,
+					data: "Incorrect email/password"
 				});
-			 }
+			 } else if (!user) {
+				res.json({
+					type: false,
+					data: "Incorrect email/password"
+				});
+			} 
 		 });
  });
 

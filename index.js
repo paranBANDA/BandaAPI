@@ -20,7 +20,7 @@ const key = "Secret_Key"
 app.use('/auth',authRouter);
 
 app.get('/', (req, res, next) => {
-	User.findOne({name : "유"}, function(err,obj){
+	User.findOne({name : "test1"}, function(err,obj){
 		console.log(obj);
 		res.send(obj);
 	})
