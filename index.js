@@ -26,52 +26,6 @@ app.get('/', (req, res, next) => {
 	})
 });
 
-// id, pw undifined로 리퀘스트보내니까 토큰 생성됨 이라는 response 보냄 수정 필요. 아 테스트하면서 email, pw undefined된 값들이 들어가 있어서 그런가?.
-app.post('/login', function (req, res, next) { //로그인 API
-	var localEmail = req.body.email;
-	var localPassword = req.body.password;
-	console.log(req.body,localEmail,localPassword)
-	var findConditionLocalUser = {
-		email: localEmail,
-		pw: localPassword
-	}
-	User.findOne(findConditionLocalUser)
-		 .exec(function (err, user) {
-			 if (err){
-				 res.json({
-					 type: false,
-					 data: "Error occured " + err
-				 });
-			 } else if (!user) {
-				 res.json({
-					 type: false,
-					 data: "Incorrect email/password"
-				 });
-			 } else if(user) {
-				const email = user.email;
-				const nickname = user.nickname;
-				let token = "";
-				// jwt.sign(payload, secretOrPrivateKey, [options, callback])
-				token = jwt.sign(
-				  {
-					type: "JWT",
-					email : email,
-					nickname: nickname
-				  },
-				  key,
-				  {
-					expiresIn: "15m", // 15분후 만료
-					issuer: "토큰발급자",
-				  }
-				);
-				return res.status(200).json({
-				  code: 200,
-				  message: "token is created",
-				  token: token,
-				});
-			 }
-		 });
- });
 
  app.get("/payload", auth, (req, res) => {	//token 검증 API
 	const nickname = req.decoded.nickname;
@@ -121,32 +75,7 @@ app.post('/register',async (req,res)=>{	//회원가입 API
 		}
 	})
 })
-app.post('/emailcheck',async(req,res)=>{	//email check 함수
-	const id = req.body.email
-	var findConditionLocalUser = {
-		email: id,
-	}
-	User.findOne(findConditionLocalUser)
-	.exec(function(err,user){
-		if (err){
-			res.json({
-				type: false,
-				data: "Error occured " + err
-			});
-		} else if (user) {
-			res.json({
-				type: false,
-				data: "Email already exists"
-			});
-		}
-		else{
-			res.json({
-				type: true,
-				data: "email available"
-			})
-		}
-	})
-})
+
 function localSignup(req, next){	//회원가입 함수
 		const user = new User(req);
 		user.save(function (err, newUser) {

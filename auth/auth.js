@@ -35,6 +35,32 @@ router.post('/register',async (req,res)=>{	//회원가입 API
 		message: "register",
 	  });
 });
+router.post('/emailcheck',async (req,res)=>{	//회원가입 API 
+	const id = req.body.email
+	var findConditionLocalUser = {
+		email: id,
+	}
+	User.findOne(findConditionLocalUser)
+	.exec(function(err,user){
+		if (err){
+			res.json({
+				type: false,
+				data: "Error occured " + err
+			});
+		} else if (user) {
+			res.json({
+				type: false,
+				data: "Email already exists"
+			});
+		}
+		else{
+			res.json({
+				type: true,
+				data: "email available"
+			})
+		}
+	})
+});
 
 router.post('/login', function (req, res, next) { //로그인 API
 	var localEmail = req.body.email;
