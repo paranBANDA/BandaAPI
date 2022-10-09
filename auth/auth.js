@@ -62,6 +62,34 @@ router.post('/emailcheck',async (req,res)=>{	//회원가입 API
 	})
 });
 
+router.post('/groupcheck',async(req,res)=>{
+	const useremail = req.body.email
+	var findConditionLocalUser = {
+		email: useremail,
+	}
+	User.findOne(findConditionLocalUser)
+	.exec(function(err,user){
+		if (err){
+			res.json({
+				type: false,
+				data: "Error occured " + err
+			});
+		} else if (user) {
+			console.log(user)
+			res.json({
+				type: true,
+				data: user.familyId
+			})
+		}
+		else{
+			res.json({
+				type: false,
+				data: "email available"
+			})
+		}
+	})
+})
+
 router.post('/login', function (req, res, next) { //로그인 API
 	var localEmail = req.body.email;
 	var findConditionLocalUser = {
