@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
+
 const petSchema = new Schema({
 	petId: {
 		type: Number, // 자료형
@@ -30,5 +30,4 @@ const petSchema = new Schema({
 		type: Number,
 	},
 });
-
-module.exports = mongoose.model('pet', petSchema);
+export default mongoose.model('pet', petSchema);

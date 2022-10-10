@@ -2,7 +2,7 @@ import express from 'express';
 import User from '../model/user.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-
+import Pet from '../model/pet.js'
 var jwtSecret = "secret"
 const key = "Secret_Key"
 
@@ -89,7 +89,28 @@ router.post('/groupcheck',async(req,res)=>{
 		}
 	})
 })
+router.post('/petregister',function(req,res,next){
+	const dogName = req.body.dogName
+	const dogBreed = req.body.dogBreed
+	const dogGender = req.body.dogGender
+	const dogBirthday = req.body.dogBirthday
+	const dogMeetdate = req.body.dogMeetdate
+	const userId = req.body.email
+	const pet = new Pet({
+		birthday: dogBirthday,
+		userId: userId,
+		gender: dogGender,
+		meetday: dogMeetdate,
+		petname: dogName,
+		breed: dogBreed,
+	});
+	pet.save();
+	return res.status(200).json({
+		type: true,
+		data: "register complete",
+	  });
 
+})
 router.post('/login', function (req, res, next) { //로그인 API
 	var localEmail = req.body.email;
 	var findConditionLocalUser = {
