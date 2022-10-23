@@ -32,6 +32,7 @@ router.post('/register',async (req,res)=>{	//회원가입 API
 	user.save();
 	return res.status(200).json({
 		code: 200,
+		type:true,
 		message: "register",
 	  });
 });
@@ -124,11 +125,11 @@ router.post('/login', function (req, res, next) { //로그인 API
 					 data: "Error occured " + err
 				 });
 			 } else if(user) {
-				var localPassword = req.body.password;
+				var localPassword = req.body.pw;
 				console.log(localPassword, user.pw);
 				var isCorrectPw = await bcrypt.compare(localPassword ,user.pw);
 				if(isCorrectPw) {
-
+					console.log("correct")
 					const email = user.email;
 					const nickname = user.nickname;
 					let token = "";
@@ -147,6 +148,7 @@ router.post('/login', function (req, res, next) { //로그인 API
 					);
 					return res.status(200).json({
 					  code: 200,
+					  type:true,
 					  message: "token is created",
 					  token: token,
 					});
