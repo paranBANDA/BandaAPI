@@ -6,7 +6,7 @@ import {auth} from './authMiddleware.js'
 import User from './model/user.js';
 import {connect} from './model/index.js'
 import authRouter from './auth/auth.js';
-
+import mainRouter from './main/main.js'
 var app = express()
 
 var router = express.Router();
@@ -18,7 +18,7 @@ var jwtSecret = "secret"
 const key = "Secret_Key"
 
 app.use('/auth',authRouter);
-
+app.use('/main',mainRouter)
 app.get('/', (req, res, next) => {
 	User.findOne({name : "test1"}, function(err,obj){
 		console.log(obj);
