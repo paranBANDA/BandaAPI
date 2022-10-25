@@ -34,8 +34,8 @@ const userSchema = new Schema({
 	locationallow: {
 		type: Boolean,
 	},
-	jsonWebtoken:{
-		type: String
-	}
+	jsonWebtoken: {
+		type: String,
+	},
 });
 export default mongoose.model('User', userSchema);

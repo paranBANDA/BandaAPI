@@ -1,41 +1,39 @@
 import express from 'express';
-import Pet from '../model/pet.js'
+import Pet from '../model/pet.js';
 
 var router = express.Router();
 
-router.use(function(req, res, next) {
-    next();
-  });
-router.get('/', function(req, res) {
-    res.send('hi1');
+router.use(function (req, res, next) {
+	next();
 });
-  
-router.get('/showuserpet',function(req,res,next){
-    const userId = req.body.email
-    var findlUserPet = {
+router.get('/', function (req, res) {
+	res.send('hi1');
+});
+
+router.get('/showuserpet', function (req, res, next) {
+	const userId = req.body.email;
+	var findlUserPet = {
 		userId: userId,
-	}
-	Pet.find(findlUserPet)
-	.exec(function(err,user){
-		if (err){
+	};
+	Pet.find(findlUserPet).exec(function (err, user) {
+		if (err) {
 			res.json({
 				type: false,
-				data: "Error occured " + err
+				data: 'Error occured ' + err,
 			});
 		} else if (user) {
-            console.log(user)
+			console.log(user);
 			res.json({
 				type: true,
-				data: user
+				data: user,
 			});
-		}
-		else{
+		} else {
 			res.json({
 				type: false,
-				data: "please check email"
-			})
+				data: 'please check email',
+			});
 		}
-	})
+	});
 });
 
 export default router;
