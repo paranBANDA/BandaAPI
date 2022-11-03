@@ -3,6 +3,7 @@ import AWS from 'aws-sdk'
 import multer from 'multer'
 import multerS3 from 'multer-s3'
 import path from 'path'
+import moment from 'moment'
 AWS.config.update({
     region : 'ap-northeast-2',
     accessKeyId : process.env.AWS_ACCESS_KEY_ID,
@@ -25,21 +26,23 @@ const imageUploader = multer({
         s3:s3,
         bucket: 'bandabucket',
         key:(req,file,callback) =>{
-            const uploadDirectory = req.query.directory ?? ''
+            const useremail = req.query.useremail
+            const petname = req.query.petname
             const extension = path.extname(file.originalname)
+            const datetime = moment().format('YYYYMMDD');
             if(!allowedExtensions.includes(extension)){
                 return callback(new Error('wrong extension'))
             }
-            callback(null, `${uploadDirectory}/${Date.now()}_${file.originalname}`)
+            callback(null, `diary/${datetime}_${file.originalname}`)
         },
         acl : 'public-read-write'
     })  
 })
 var router = express.Router();
 
-router.post('/uploadimage', imageUploader.single('image'),(req,res)=>{
-    console.log('good')
+router.post('/uploaddiaryimage', imageUploader.single('image'),(req,res)=>{
     res.send('good!')
+    console.log(res)
 })
 
 router.get('/', function (req, res) {
