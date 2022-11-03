@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 	res.send('hi1');
 });
 
-router.get('/showuserpet', function (req, res, next) {
+router.post('/showuserpet', function (req, res, next) {
 	console.log(req.body)
 	const userId = req.body.email;
 	var findlUserPet = {
