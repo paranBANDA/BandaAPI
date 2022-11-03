@@ -13,13 +13,13 @@ AWS.config.update({
 const s3 = new AWS.S3();
 
 const allowedExtensions = ['.png', '.jpg', '.jpeg', '.bmp']
-s3.listBuckets(function(err, data) {
-    if (err) {
-      console.log("Error", err);
-    } else {
-      console.log("Success", data.Buckets);
-    }
-  });
+// s3.listBuckets(function(err, data) {
+//     if (err) {
+//       console.log("Error", err);
+//     } else {
+//       console.log("Success", data.Buckets);
+//     }
+//   });
 
 const imageUploader = multer({
     storage:multerS3({

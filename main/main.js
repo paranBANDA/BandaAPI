@@ -11,6 +11,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/showuserpet', function (req, res, next) {
+	console.log(req.body)
 	const userId = req.body.email;
 	var findlUserPet = {
 		userId: userId,
