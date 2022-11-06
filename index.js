@@ -7,7 +7,9 @@ import User from './model/user.js';
 import { connect } from './model/index.js';
 import authRouter from './auth/auth.js';
 import mainRouter from './main/main.js';
-import polaroidRouter from './polaroid/polaroid.js'
+import polaroidRouter from './polaroid/polaroid.js';
+import infoRouter from './auth/info.js';
+
 var app = express();
 
 var router = express.Router();
@@ -21,6 +23,7 @@ const key = 'Secret_Key';
 app.use('/auth', authRouter);
 app.use('/main', mainRouter);
 app.use('/polaroid', polaroidRouter);
+app.use('/info', infoRouter);
 app.get('/', (req, res, next) => {
 	User.findOne({ name: 'test1' }, function (err, obj) {
 		console.log(obj);
