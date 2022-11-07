@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 const walkingSchema = new Schema({
 	walkingId: {
@@ -28,4 +27,4 @@ const walkingSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('walking', walkingSchema);
+export default mongoose.model('Walking', walkingSchema);

@@ -1,5 +1,5 @@
 import express from 'express';
-import User from '../model/user.js';
+import Walking from '../model/walking.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import Pet from '../model/pet.js';
@@ -11,8 +11,38 @@ router.use(function (req, res, next) {
 	next();
 });
 
+/*
+	User.findOne({ name: 'test1' }, function (err, obj) {
+		console.log(obj);
+		res.send(obj);
+	});*/
 router.get('/pet', function (req, res) {
 	console.log("ID : " + req.query.id + " 입니다")
+
+	Walking.find({ petId: req.query.id}, function (err, obj) {
+		if (err) {
+			res.json({
+				type: false,
+				data: 'Error occured ' + err,
+			});
+		} else {
+			var dateArr = [];
+			var feelArr = [];
+			for(var i =0;i<obj.length;i++){
+				dateArr.push(obj[i].walkingtime)
+				feelArr.push(obj[i].walkingfeel)
+			}
+			console.log(dateArr);
+			console.log(feelArr);
+			
+			res.send({
+				date: dateArr,
+				feel: feelArr
+			});
+		}
+	})
+
+	/*
 	if(req.query.id == 0) {
 		res.send({
 			date : ["2022-11-01", 
@@ -35,7 +65,7 @@ router.get('/pet', function (req, res) {
 		"2022-11-09", 
 		"2022-11-12"],
 		feel : ["Bad", "Happy", "Normal", "Happy", "Bad", "Normal", "Normal"]});
-	}
+	}*/
 });
   
 

@@ -8,7 +8,8 @@ import { connect } from './model/index.js';
 import authRouter from './auth/auth.js';
 import mainRouter from './main/main.js';
 import polaroidRouter from './polaroid/polaroid.js';
-import infoRouter from './auth/info.js';
+import infoRouter from './info/info.js';
+import walkRouter from './walk/walk_result.js';
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use('/auth', authRouter);
 app.use('/main', mainRouter);
 app.use('/polaroid', polaroidRouter);
 app.use('/info', infoRouter);
+app.use('/walk', walkRouter);
 app.get('/', (req, res, next) => {
 	User.findOne({ name: 'test1' }, function (err, obj) {
 		console.log(obj);
