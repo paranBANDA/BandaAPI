@@ -24,7 +24,8 @@ router.post('/showuserpet', function (req, res, next) {
 			});
 		} else if (user) {
 			res.json({
-				user
+				type: true,
+				data: user,
 			});
 		} else {
 			res.json({
