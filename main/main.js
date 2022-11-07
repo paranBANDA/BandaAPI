@@ -23,10 +23,8 @@ router.post('/showuserpet', function (req, res, next) {
 				data: 'Error occured ' + err,
 			});
 		} else if (user) {
-			console.log(user);
 			res.json({
-				type: true,
-				data: user,
+				user
 			});
 		} else {
 			res.json({
