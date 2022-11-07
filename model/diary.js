@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 const diarySchema = new Schema({
@@ -15,7 +15,7 @@ const diarySchema = new Schema({
 		type: String,
 	},
 	petId: {
-		type: Number,
+		type: String,
 	},
 	date: {
 		type: Date,
@@ -25,4 +25,4 @@ const diarySchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('diary', diarySchema);
+export default mongoose.model('diary', diarySchema);

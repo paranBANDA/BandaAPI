@@ -4,6 +4,7 @@ import multer from 'multer'
 import multerS3 from 'multer-s3'
 import path from 'path'
 import moment from 'moment'
+import Diary from '../model/diary.js'
 AWS.config.update({
     region : 'ap-northeast-2',
     accessKeyId : process.env.AWS_ACCESS_KEY_ID,
@@ -44,9 +45,78 @@ router.post('/uploaddiaryimage', imageUploader.single('image'),(req,res)=>{
     res.send('good!')
     console.log(res)
 })
-
-router.get('/', function (req, res) {
-	res.send('hi1');
+router.post('/addDiaryText', function (req, res, next) {
+	const userId = req.body.email;
+    const petId = req.body.petname;
+	const text = req.body.text;
+    const date = req.body.date;
+    const addDiary = new Diary({
+        userId : userId,
+        petId : petId,
+        text : text,
+        date : date
+    })
+    addDiary.save()
+    return res.status(200).json({
+		code: 200,
+		type: true,
+		message: 'register',
+	});
 });
 
+router.post('/getDiaryTextBydate',function(req,res,next){
+    const userId = req.body.email;
+    const petId = req.body.petname;
+    const date = req.body.date;
+    const findDiary = {
+        userId : userId,
+        petId : petId,
+        date : date
+    }
+    Diary.findOne(findDiary).exec(function(err,diary){
+        if (err) {
+			res.json({
+				type: false,
+				data: 'Error occured ' + err,
+			});
+		} else if (diary) {
+			res.json({
+				type: true,
+				data: diary,
+			});
+		} else {
+			res.json({
+				type: false,
+				data: 'please check input',
+			});
+		}
+    })
+})
+
+router.post('/getDiarybyPet', function(req,res,next){
+    const userId = req.body.email;
+    const petId = req.body.petname;
+    const findDiarybypet = {
+        userId : userId,
+        petId : petId
+    }
+    Diary.find(findDiarybypet).exec(function (err, diary) {
+		if (err) {
+			res.json({
+				type: false,
+				data: 'Error occured ' + err,
+			});
+		} else if (diary) {
+			res.json({
+				type: true,
+				data: diary,
+			});
+		} else {
+			res.json({
+				type: false,
+				data: 'please check email',
+			});
+		}
+	});
+})
 export default router;
