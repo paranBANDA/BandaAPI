@@ -49,7 +49,7 @@ router.post('/walkinfo', async (req, res) => {
 		petId: petId,
 		walkingday: walkingDay,
 		walkingtime: walkingTime,
-		walkingfeel: walkingFeel
+		walkingfeel: walkingFeel,
 	});
 	walkingData.save();
 	return res.status(200).json({
@@ -58,6 +58,5 @@ router.post('/walkinfo', async (req, res) => {
 		message: 'register',
 	});
 });
-  
 
 export default router;

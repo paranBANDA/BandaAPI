@@ -89,9 +89,7 @@ router.post('/groupcheck', async (req, res) => {
 		}
 	});
 });
-router.post('/grouppetregister', function(req,res,next){
-
-})
+router.post('/grouppetregister', function (req, res, next) {});
 router.post('/petregister', function (req, res, next) {
 	const dogName = req.body.dogName;
 	const dogBreed = req.body.dogBreed;
