@@ -12,33 +12,6 @@ router.use(function (req, res, next) {
 });
 
 router.post('/walkinfo', async (req, res) => {
-	//회원가입 API
-	/*
-	walkingId: {
-		type: Number,
-	},
-	userId: {
-		type: String,
-	},
-	petId: {
-		type: Number,
-	},
-	walkingdata: {
-		type: String,
-	},
-	walkingday: {
-		type: String,
-	},
-	walkingtime: {
-		type: String,
-	},
-	walkingfeel: {
-		type: String,
-	},
-	walkingroute: {
-		type: String,
-	},
-	*/
 	const userId = req.body.userId;
 	const petId = req.body.petId;
 	const walkingDay = req.body.walkingStart; // walkingDay를 시작날짜 + 시간 walkingTime을 끝난날짜 + 시간으로 바꿔보는게 어떨까..
