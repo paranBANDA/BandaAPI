@@ -80,7 +80,7 @@ router.post('/addDiaryText', function (req, res, next) {
 		} else if (diary) {
 			res.json({
 				type: true,
-				data: diary,
+				data: 'success',
 			});
 		} else {
 			res.json({
