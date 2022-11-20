@@ -48,7 +48,7 @@ router.post('/uploaddiaryimage', imageUploader.single('image'), (req, res) => {
 		userId: userId,
 		petId: petId,
 		picture: picture,
-		date: date.format('YYYY-MM-DD'),
+		date: date,
 		text: 'text',
 	});
 	addDiray.save();
