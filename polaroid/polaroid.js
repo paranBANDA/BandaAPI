@@ -53,9 +53,8 @@ router.post('/uploaddiaryimage', imageUploader.single('image'), (req, res) => {
 	});
 	addDiray.save();
 	return res.status(200).json({
-		code: 200,
 		type: true,
-		message: 'register',
+		data: 'register',
 	});
 });
 router.post('/addDiaryText', function (req, res, next) {
