@@ -49,7 +49,7 @@ router.post('/uploaddiaryimage', imageUploader.single('image'), (req, res) => {
 		petId: petId,
 		picture: picture,
 		date: date.format('YYYY-MM-DD'),
-		text: '텍스트를 입력해주세요!',
+		text: 'text',
 	});
 	addDiray.save();
 	return res.status(200).json({
@@ -62,13 +62,13 @@ router.post('/addDiaryText', function (req, res, next) {
 	const userId = req.body.email;
 	const petId = req.body.petname;
 	const text = req.body.text;
-	const date = req.body.date + 'T15:00:00.000+00:00';
+	const date = req.body.date + 'T00:00:00.000+00:00';
 	const findDiray = {
 		userId: userId,
 		petId: petId,
 		date: date,
 	};
-	Diary.updateOne(findDiray, { $set: { text: text } }).exec(function (
+	Diary.updateMany(findDiray, { $set: { text: text } }).exec(function (
 		err,
 		diary,
 	) {
