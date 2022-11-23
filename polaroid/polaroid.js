@@ -99,7 +99,7 @@ router.post('/getDiaryTextBydate', function (req, res, next) {
 		petId: petId,
 		date: date,
 	};
-	Diary.findOne(findDiary).exec(function (err, diary) {
+	Diary.find(findDiary).exec(function (err, diary) {
 		if (err) {
 			res.json({
 				type: false,
