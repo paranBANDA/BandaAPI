@@ -97,6 +97,7 @@ router.post('/petregister', function (req, res, next) {
 	const dogBirthday = req.body.dogBirthday;
 	const dogMeetdate = req.body.dogMeetdate;
 	const email = req.body.email;
+	const image = "https://bandabucket.s3.ap-northeast-2.amazonaws.com/petmain/bandalogo.png"
 	const pet = new Pet({
 		birthday: dogBirthday,
 		userId: email,
@@ -104,6 +105,7 @@ router.post('/petregister', function (req, res, next) {
 		meetday: dogMeetdate,
 		petname: dogName,
 		breed: dogBreed,
+		image: image
 	});
 	pet.save();
 	return res.status(200).json({
