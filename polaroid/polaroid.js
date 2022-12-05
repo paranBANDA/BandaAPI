@@ -5,6 +5,7 @@ import multerS3 from 'multer-s3';
 import path from 'path';
 import moment from 'moment';
 import Diary from '../model/diary.js';
+import {spawn} from 'child_process'
 AWS.config.update({
 	region: 'ap-northeast-2',
 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -37,7 +38,23 @@ const imageUploader = multer({
 		acl: 'public-read-write',
 	}),
 });
+
+
+
+
+
 var router = express.Router();
+
+router.get('/py', function (req, res) {
+	let dataToSend;
+	const python = spawn('python',['hello.py', 'www.url.com'])
+	python.stdout.on('data',(data)=>{
+		dataToSend = data.toString();
+	})
+	python.on('close',(code)=>{
+		res.send(dataToSend)
+	})
+});
 
 router.post('/uploaddiaryimage', imageUploader.single('image'), (req, res) => {
 	const picture = req.file.location;
