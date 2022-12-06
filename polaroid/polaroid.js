@@ -57,6 +57,7 @@ router.get('/py', function (req, res) {
 });
 
 router.post('/uploaddiaryimage', imageUploader.single(Buffer.from('image', "base64").toString('utf8')), (req, res) => {
+	console.log(Buffer.from(req.body.image, "base64").toString('utf8'))
 	const picture = req.file.location;
 	const userId = req.body.email;
 	const petId = req.body.petname;
