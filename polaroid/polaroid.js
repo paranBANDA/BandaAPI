@@ -6,6 +6,7 @@ import path from 'path';
 import moment from 'moment';
 import Diary from '../model/diary.js';
 import {spawn} from 'child_process'
+import fs from "fs"
 AWS.config.update({
 	region: 'ap-northeast-2',
 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
