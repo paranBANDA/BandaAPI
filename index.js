@@ -17,7 +17,9 @@ var router = express.Router();
 connect();
 dotenv.config();
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ 
+	limit: '10mb',
+	extended: false }));
 var jwtSecret = 'secret';
 const key = 'Secret_Key';
 
