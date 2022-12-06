@@ -57,16 +57,8 @@ router.get('/py', function (req, res) {
 	})
 });
 
-router.post('/uploaddiaryimage', imageUploader.single('image'), (req, res) => {
-	fs.readFile(req.body.image, function(error, data) {
-		if(error){
-		  response.end('500 Internal Server '+error);
-		}else{
-		  // 6. Content-Type 에 4번에서 추출한 mime type 을 입력
-		  response.end(data);
-		  console.log(data)
-		}
-	  });
+router.post('/uploaddiaryimage', imageUploader.single(Buffer.from('image', "base64").toString('utf8')), (req, res) => {
+	console.log(Buffer.from(req.body.image, "base64").toString('utf8'))
 	const picture = req.file.location;
 	const userId = req.body.email;
 	const petId = req.body.petname;
