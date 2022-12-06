@@ -19,6 +19,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ 
 	limit: '10mb',
+	parameterLimit : 1000000,
 	extended: false }));
 var jwtSecret = 'secret';
 const key = 'Secret_Key';
