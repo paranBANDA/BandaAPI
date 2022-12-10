@@ -63,12 +63,14 @@ router.post('/uploaddiaryimage', imageUploader.single('files'), (req, res) => {
 	const userId = req.body.email;
 	const petId = req.body.petname;
 	const date = req.body.date;
+	const status = req.body.status;
 	const addDiray = new Diary({
 		userId: userId,
 		petId: petId,
 		picture: picture,
 		date: date,
 		text: 'text',
+		status: status,
 	});
 	addDiray.save();
 	return res.status(200).json({

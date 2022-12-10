@@ -23,6 +23,9 @@ const diarySchema = new Schema({
 	text: {
 		type: String,
 	},
+	status: {
+		type: Int,
+	}
 });
 
 export default mongoose.model('diary', diarySchema);
