@@ -24,7 +24,7 @@ const diarySchema = new Schema({
 		type: String,
 	},
 	status: {
-		type: Int,
+		type: Number,
 	}
 });
 
