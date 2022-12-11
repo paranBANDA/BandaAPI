@@ -42,8 +42,11 @@ const imageUploader = multer({
 });
 
 function runAiShell (picture){
+	shell.exec('cd ~')
 	shell.exec(`./../BandaAI/run_ai.sh ${picture}`)
+	const AItext = shell.exec('cat ./../BandaAI/echo')
 	console.log("success shell")
+	return AItext
 }
 
 var router = express.Router();
@@ -61,6 +64,8 @@ router.get('/py', function (req, res) {
 
 router.post('/uploaddiaryimage', imageUploader.single('files'), (req, res) => {
 	console.log(req.body.files)
+	AItext = runAiShell(picture)
+	console.log(AItext)
 	const picture = req.file.location;
 	const userId = req.body.email;
 	const petId = req.body.petname;
@@ -74,7 +79,6 @@ router.post('/uploaddiaryimage', imageUploader.single('files'), (req, res) => {
 		text: 'text',
 		status: status,
 	});
-	runAiShell(picture)
 	addDiray.save();
 	return res.status(200).json({
 		type: true,
