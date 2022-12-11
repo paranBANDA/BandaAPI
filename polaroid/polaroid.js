@@ -7,6 +7,7 @@ import moment from 'moment';
 import Diary from '../model/diary.js';
 import {spawn} from 'child_process'
 import fs from "fs"
+import shell from 'shelljs'
 AWS.config.update({
 	region: 'ap-northeast-2',
 	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -40,9 +41,10 @@ const imageUploader = multer({
 	}),
 });
 
-
-
-
+function runAiShell (picture){
+	shell.exec(`./../BandaAI/run_ai.sh ${picture}`)
+	console.log("success shell")
+}
 
 var router = express.Router();
 
@@ -70,6 +72,7 @@ router.post('/uploaddiaryimage', imageUploader.single('files'), (req, res) => {
 		date: date,
 		text: 'text',
 	});
+	runAiShell(picture)
 	addDiray.save();
 	return res.status(200).json({
 		type: true,
