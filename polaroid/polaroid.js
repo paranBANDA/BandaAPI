@@ -64,9 +64,9 @@ router.get('/py', function (req, res) {
 
 router.post('/uploaddiaryimage', imageUploader.single('files'), (req, res) => {
 	console.log(req.body.files)
+	const picture = req.file.location;
 	AItext = runAiShell(picture)
 	console.log(AItext)
-	const picture = req.file.location;
 	const userId = req.body.email;
 	const petId = req.body.petname;
 	const date = req.body.date;
