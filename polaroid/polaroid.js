@@ -49,17 +49,6 @@ function runAiShell (picture){
 
 var router = express.Router();
 
-router.get('/py', function (req, res) {
-	let dataToSend;
-	const python = spawn('python',['hello.py', 'www.url.com'])
-	python.stdout.on('data',(data)=>{
-		dataToSend = data.toString();
-	})
-	python.on('close',(code)=>{
-		res.send(dataToSend)
-	})
-});
-
 router.post('/uploaddiaryimage', imageUploader.single('files'), (req, res) => {
 	console.log(req.body.files)
 	const picture = req.file.location;
