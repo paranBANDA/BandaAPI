@@ -44,7 +44,7 @@ const imageUploader = multer({
 function runAiShell (picture){
 	const {stdout, stderr, code} = shell.exec(`./../BandaAI/run_ai.sh ${picture}`)
 	console.log(stdout, stderr, code)
-	return AItext
+	return stdout
 }
 
 var router = express.Router();
@@ -74,7 +74,7 @@ router.post('/uploaddiaryimage', imageUploader.single('files'), (req, res) => {
 		petId: petId,
 		picture: picture,
 		date: date,
-		text: 'text',
+		text: AItext,
 		status: status,
 	});
 	addDiray.save();
