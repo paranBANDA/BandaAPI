@@ -42,7 +42,7 @@ const imageUploader = multer({
 });
 
 function runAiShell (picture){
-	const AItext = shell.exec(`./../BandaAI/run_ai.sh ${picture}`)
+	const AItext = shell.exec(`./../BandaAI/run_ai.sh ${picture}`).stdout
 	console.log(AItext)
 	return AItext
 }
